@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./styles.css";
 import Pagination from "./componenets/pagination/Pagination";
 import Table from "./componenets/table/Table";
+import { API_END_POINT } from "./Constants";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -12,7 +13,7 @@ const App = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://raw.githubusercontent.com/saaslabsco/frontend-assignment/refs/heads/master/frontend-assignment.json"
+       API_END_POINT
       );
       const result = await response.json();
       setData(result);
@@ -22,20 +23,17 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log("calledxxx")
     fetchData();
   }, []);
 
-  console.log("intest", data);
   // Pagination Logic
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const currentRecords = data?.slice(indexOfFirstRecord, indexOfLastRecord);
-  console.log("intest11", currentRecords);
 
   return (
     data.length > 0 && (
-      <div className="app-container">
+      <div className="container">
         <header>
           <h1 tabIndex={0}>Highly Rated Kickstarter Projects</h1>
         </header>
