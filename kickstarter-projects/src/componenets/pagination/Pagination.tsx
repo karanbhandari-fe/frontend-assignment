@@ -1,11 +1,18 @@
 import React from "react";
 
-const Pagination = ({
-  totalRecords,
-  recordsPerPage,
-  currentPage,
-  onPageChange,
-}) => {
+interface PaginationProps {
+    totalRecords: number; // Total number of records
+    recordsPerPage: number; // Records displayed per page
+    currentPage: number; // Current page number
+    onPageChange: (page: number) => void; // Callback for page change
+  }
+
+  const Pagination: React.FC<PaginationProps> = ({
+    totalRecords,
+    recordsPerPage,
+    currentPage,
+    onPageChange,
+  }) => {
   const totalPages = Math.ceil(totalRecords / recordsPerPage);
 
   const handlePrev = () => {
@@ -30,7 +37,7 @@ const Pagination = ({
       >
         Previous
       </button>
-      <span tabIndex="0" aria-live="polite">
+      <span tabIndex={0} aria-live="polite">
         Page {currentPage} of {totalPages}
       </span>
       <button

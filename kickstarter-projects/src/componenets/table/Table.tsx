@@ -1,6 +1,11 @@
-import React from 'react';
+import React from "react";
 
-const Table = ({ data }) => {
+interface TableProps {
+  data: { "s.no": number; "percentage.funded": number; "amt.pledged": number }[];
+}
+
+const Table: React.FC<TableProps> = ({ data }) => {
+    console.log("intest table",data)
   return (
     <table className="table" aria-label="Kickstarter Projects Table">
     <caption>List of highly-rated Kickstarter projects</caption>
@@ -13,7 +18,7 @@ const Table = ({ data }) => {
     </thead>
       <tbody>
         {data.map((item) => (
-          <tr key={item["s.no"]}>
+          <tr key={item["s.no"] + 1}>
             <td>{item["s.no"] + 1}</td>
             <td>{item["percentage.funded"]}</td>
             <td>{item["amt.pledged"]}</td>

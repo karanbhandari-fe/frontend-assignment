@@ -3,7 +3,6 @@ import "./styles.css";
 import Pagination from "./componenets/pagination/Pagination";
 import Table from "./componenets/table/Table";
 
-
 const App = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,29 +22,34 @@ const App = () => {
   };
 
   useEffect(() => {
+    console.log("calledxxx")
     fetchData();
   }, []);
 
+  console.log("intest", data);
   // Pagination Logic
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = data.slice(indexOfFirstRecord, indexOfLastRecord);
+  const currentRecords = data?.slice(indexOfFirstRecord, indexOfLastRecord);
+  console.log("intest11", currentRecords);
 
   return (
-    <div className="app-container">
-      <header>
-        <h1 tabIndex="0">Highly Rated Kickstarter Projects</h1>
-      </header>
-      <main id="main-content">
-        <Table data={currentRecords} />
-        <Pagination
-          totalRecords={data.length}
-          recordsPerPage={recordsPerPage}
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-        />
-      </main>
-    </div>
+    data.length > 0 && (
+      <div className="app-container">
+        <header>
+          <h1 tabIndex={0}>Highly Rated Kickstarter Projects</h1>
+        </header>
+        <main id="main-content">
+          <Table data={currentRecords} />
+          <Pagination
+            totalRecords={data.length}
+            recordsPerPage={recordsPerPage}
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+          />
+        </main>
+      </div>
+    )
   );
 };
 
